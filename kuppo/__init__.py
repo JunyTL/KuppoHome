@@ -1,34 +1,37 @@
 import os
+
 from flask import Flask
 
-def create_app(test_config = None):
-	app = Flask(__name__, instance_relative_config = True)		#create app
-	app.config.from_mapping(
-		SECRET_KEY = 'dev',
-		DATABASE = os.path.join(app.instance_path, 'kuppo.sqlite')
-	)
+from .db import init_app
+from .kuppo_home import bp as kuppo_home_bp
+from .member import bp as member_bp
 
-	if test_config is None :
-		app.config.from_pyfile('config.py', silent = True)
-	else :
-		app.config.from_mapping(test_config)
 
-	try:
-		os.makedirs(app.instance_path)
-	except OSError :
-		pass
+def create_app(test_config=None):
+    app = Flask(__name__, instance_relative_config=True)    # create app
 
-	from . import db 
-	db.init_app(app)
+    app.config.from_mapping(
+        SECRET_KEY = 'dev',
+        DATABASE = os.path.join(app.instance_path, 'kuppo.sqlite')
+    )
 
-	from . import kuppo_home
-	app.register_blueprint(kuppo_home.bp)
+    if test_config is None:
+        app.config.from_pyfile('config.py', silent=True)
+    else:
+        app.config.from_mapping(test_config)
 
-	from . import member
-	app.register_blueprint(member.bp)
-	
-	app.add_url_rule('/', endpoint='home')
+    try:
+        os.makedirs(app.instance_path)
+    except OSError:
+        pass
 
-	return app
+    init_app(app)
+
+    app.register_blueprint(kuppo_home_bp)
+    app.register_blueprint(member_bp)
+
+    app.add_url_rule('/', endpoint='home')
+
+    return app
 
 app = create_app()
