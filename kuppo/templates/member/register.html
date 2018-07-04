@@ -1,26 +1,31 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Register
+Sign Up
 {% endblock %}
+{% block headlink %} {% endblock %}
 
 {% block content %}
 <div>
-	<h1>Sign In</h1>
+	<h1>Sign Up</h1>
 	<hr>
 	<form method="post">
 		<div class="form-group">
 			<label for="id">ID</label>
-			<input type="text" id="id">
-			<small>Write your name on Final Fantasy 14</small>
+			<input type="text" class="form-control" id="id">
+			<small class="form-text">Write your nickname on Final Fantasy 14</small>
 		</div>
 		<div class="form-group">
 			<label for="password">PW</label>
-			<input type="password" id="password">
+			<input type="password" class="form-control" id="password">
 		</div>
 		<div class="form-group">
 			<label for="email">Email</label>
-			<input type="email" id="email">
+			<input type="email" class="form-control" id="email">
+		</div>
+		<div class="form-group">
+			<label for=profileIcon>Input your profile icon.</label>
+			<input type="file" class="form-control-file" id="profileIcon">
 		</div>
 		<button type="submit" class="btn btn-primary">Register</button>
 	</form>
