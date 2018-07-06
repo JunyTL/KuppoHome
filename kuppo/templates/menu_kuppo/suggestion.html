@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}- suggestion {% endblock %}
+{% block headlink %} 
+{% endblock %}
+
+{% block content %}
+<form method="post">
+	<div class="form-group">
+		<label>User Name</label>
+		<input type="text" class="form-control" id="id" value="{{request.form['username']}}" required="">
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			<label for="category">Category</label>
+		</div>
+		<select class="custom-select" id="category">
+			<option selected>select category</option>
+			<option>event</option>
+			<option>party</option>
+			<option>member</option>
+			<option>others</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label for="title">Title</label>
+		<input type="text" class="form-control" id="title" required="">
+	</div>
+	<div class="form-group">
+		<label for="context">Context</label>
+		<textarea type="text" class="form-control" id="xontext" required=""></textarea>
+	</div>
+	<div>
+		<label for="resources">Attach photo resources if you need.</label>
+		<input type="file" class="form-control-file" id="resources">
+	</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}

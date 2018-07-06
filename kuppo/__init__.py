@@ -5,6 +5,7 @@ from flask import Flask
 from .db import init_app
 from .kuppo_home import bp as kuppo_home_bp
 from .member import bp as member_bp
+from .menu_kuppo import bp as menu_kuppo_bp
 
 
 def create_app(test_config=None):
@@ -29,6 +30,7 @@ def create_app(test_config=None):
 
     app.register_blueprint(kuppo_home_bp)
     app.register_blueprint(member_bp)
+    app.register_blueprint(menu_kuppo_bp)
 
     app.add_url_rule('/', endpoint='home')
 
